@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from "react";
-import SampleImage from "../../assets/sample1.jpg";
-import SampleImage1 from "../../assets/sample2.jpg";
-import SampleImage2 from "../../assets/sample3.jpg";
-import SampleImage3 from "../../assets/sample4.jpg";
-import SampleImage4 from "../../assets/sample5.jpg";
-import SampleImage5 from "../../assets/sample6.jpg";
+import React, { useEffect } from "react";
 import * as THREE from "three";
 
-export default function App() {
+export default function container({ image }) {
   var camera, scene, renderer, container, mesh;
 
   var isUserInteracting = false,
@@ -15,16 +9,6 @@ export default function App() {
     lat = 0,
     phi = 0,
     theta = 0;
-
-  var images = [
-    SampleImage1,
-    SampleImage2,
-    SampleImage3,
-    SampleImage4,
-    SampleImage5
-  ];
-
-  const [state, setstate] = useState(SampleImage);
 
   useEffect(() => {
     //get the container
@@ -46,7 +30,7 @@ export default function App() {
     // invert the geometry on the x-axis so that all of the faces point inward
     geometry.scale(-1, 1, 1);
 
-    var texture = new THREE.TextureLoader().load(state);
+    var texture = new THREE.TextureLoader().load(image);
     var material = new THREE.MeshBasicMaterial({ map: texture });
     mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
@@ -76,58 +60,21 @@ export default function App() {
       camera.target.z = 500 * Math.sin(phi) * Math.sin(theta);
       camera.lookAt(camera.target);
       /*
-        // distortion
-        camera.position.copy( camera.target ).negate();
-        */
+            // distortion
+            camera.position.copy( camera.target ).negate();
+            */
       renderer.render(scene, camera);
     }
     animate();
-  }, [state]);
 
-  function renderListofItems() {
-    return images.map(item => {
-      return (
-        <div
-          className="minibox"
-          key={item}
-          onClick={e => {
-            console.log("clickedItem", item);
-          }}
-        >
-          <img src={item} />
-        </div>
-      );
-    });
-  }
-
+    return () => {
+      container = document.querySelector(".container");
+      container.innerHTML = "";
+    };
+  }, [image]);
   return (
     <div className="container" onLoad={e => {}}>
-      <div className="sampleGallery">{renderListofItems()}</div>
+      {/* <div className="sampleGallery">{renderListofItems()}</div> */}
     </div>
   );
 }
-/*
-        To actually be able to display anything with three.js,
-         we need three things: 
-         scene, camera and renderer,
-         so that we can render the 
-         scene with camera.
-
-
-        */
-
-// scene = new THREE.Scene();
-// camera = new THREE.PerspectiveCamera(
-//   75,
-//   window.innerWidth / window.innerHeight,
-//   0.1,
-//   1000
-// );
-// var renderer = new THREE.WebGLRenderer();
-// var container = document.querySelector(".container");
-// container.append(renderer.domElement);
-
-// function animate() {
-//   requestAnimationFrame(animate);
-//   update();
-// }

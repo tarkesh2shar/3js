@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
+import RefreshApp from "./components/AppRefresh";
 import "./index.css";
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+ReactDOM.render(<RefreshApp />, document.querySelector("#root"));
