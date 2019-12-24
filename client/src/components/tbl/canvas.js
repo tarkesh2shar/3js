@@ -70,6 +70,8 @@ export default function canvas({ image }) {
   function onDocumentMouseWheel(event) {
     //when mouse wheel is altered we just need to control the field of vision in the scene
     //current fov + fractional part to not go crazy
+
+    // alert("sad");
     var fov = camera.fov + event.deltaY * 0.05;
     camera.fov = THREE.Math.clamp(fov, 10, 75);
     //call the following function for  updating the camera
@@ -126,11 +128,7 @@ export default function canvas({ image }) {
     canvasContainer.current.addEventListener("touchmove", onMouseMove, false);
     canvasContainer.current.addEventListener("touchend", onMouseUp, false);
 
-    canvasContainer.current.addEventListener(
-      "wheel",
-      onDocumentMouseWheel,
-      false
-    );
+    document.addEventListener("wheel", onDocumentMouseWheel, false);
 
     //lets control the coolest effect available here ///
     // drag and drop new images))
@@ -258,11 +256,7 @@ export default function canvas({ image }) {
         false
       );
       canvasContainer.current.removeEventListener("touchend", onMouseUp, false);
-      canvasContainer.current.removeEventListener(
-        "wheel",
-        onDocumentMouseWheel,
-        false
-      );
+      // document.removeEventListener("wheel", onDocumentMouseWheel, false);
       canvasContainer.current.removeEventListener(
         "dragenter",
         onDragEnter,
