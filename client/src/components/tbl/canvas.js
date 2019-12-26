@@ -72,7 +72,7 @@ export default function canvas({ image }) {
     //current fov + fractional part to not go crazy
 
     // alert("sad");
-    var fov = camera.fov + event.deltaY * 0.05;
+    var fov = camera.fov + event.deltaY * 0.5;
     camera.fov = THREE.Math.clamp(fov, 10, 75);
     //call the following function for  updating the camera
     camera.updateProjectionMatrix();
@@ -256,7 +256,7 @@ export default function canvas({ image }) {
         false
       );
       canvasContainer.current.removeEventListener("touchend", onMouseUp, false);
-      // document.removeEventListener("wheel", onDocumentMouseWheel, false);
+      document.removeEventListener("wheel", onDocumentMouseWheel, false);
       canvasContainer.current.removeEventListener(
         "dragenter",
         onDragEnter,

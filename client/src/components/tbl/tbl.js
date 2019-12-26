@@ -33,7 +33,7 @@ export default function tbl() {
       );
     });
   }
-  const [state, setstate] = useState(Image);
+  const [state, setstate] = useState(localStorage.getItem("img_url"));
   return (
     <div className="tbl_hell_Container">
       {/* We need two things here */}
