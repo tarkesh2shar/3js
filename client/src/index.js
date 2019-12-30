@@ -15,11 +15,13 @@ import TotalDarkTest from './components/totalDarkTest/tdt';
 import Earth from './components/earth/earth';
 import Combined from './components/combined/combine';
 import CSSRenderer from './components/cssRenderer/css';
+import WithControls from './components/withControlls.js/withControls'
 import "./index.css";
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
+    <Route path="/withControls" component={WithControls}/> 
     <Route path="/css" component={CSSRenderer}/> 
     <Route path="/combined" component={Combined}/> 
     <Route path="/earth" component={Earth}/> 
@@ -32,7 +34,7 @@ ReactDOM.render(
       <Route path="/tbl" component={TBL} />
       <Route path="/pure" component={Pure} />
       <Route path="/impure" component={RefreshApp} />
-      <Route path="/" component={CSSRenderer} />
+      <Route path="/" component={WithControls} />
     </Switch>
   </BrowserRouter>,
 

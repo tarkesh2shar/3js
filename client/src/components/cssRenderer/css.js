@@ -10,7 +10,7 @@ import Image4 from '../../../assets/ny.jpg';
 import Image5 from '../../../assets/pz.jpg';
 import Image6 from '../../../assets/nz.jpg';
 
-
+ 
 export default function css() {
 
     const canvasContainer = useRef(null);
