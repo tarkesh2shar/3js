@@ -72,10 +72,14 @@ function Canvas ({sides,chooseNextImage,choosePreviousImage,arrayOfImages}){
         var howMuchToMove=20;
       
 
-        var id = setInterval(frame, 25);
+        var id = setInterval(frame, 15);
+        var currentDate=Date.now()
 
 
         function frame(){
+
+            console.log("Calling frame every 25 miliseconds");
+            
            
             if(lon!=oldLongitude-howMuchToMove)
             {
@@ -84,8 +88,11 @@ function Canvas ({sides,chooseNextImage,choosePreviousImage,arrayOfImages}){
             }
             else{
 
+            console.log("clearning  setInterval",Date.now()-currentDate);
+            
+
                 clearInterval(id)
-                return
+            
             }
 
 
@@ -106,7 +113,7 @@ function Canvas ({sides,chooseNextImage,choosePreviousImage,arrayOfImages}){
         var oldLongitude=lon;
         var howMuchToMove=20;
 
-        var id = setInterval(frame, 25);
+        var id = setInterval(frame, 15);
 
 
         function frame(){
@@ -137,17 +144,21 @@ function Canvas ({sides,chooseNextImage,choosePreviousImage,arrayOfImages}){
         var howMuchToMove=20;
       
 
-        var id = setInterval(frame, 25);
+        var id = setInterval(frame, 15);
+        var currentDate=Date.now()
 
 
         function frame(){
            
-            if(lat!=oldLatitude+howMuchToMove)
+            if(lat!=oldLatitude+howMuchToMove && lat<85)
             {
                 lat+=1;
 
             }
             else{
+
+
+                console.log("clearning  setInterval",Date.now()-currentDate);
 
                 clearInterval(id)
                 return
@@ -168,12 +179,12 @@ function Canvas ({sides,chooseNextImage,choosePreviousImage,arrayOfImages}){
         var howMuchToMove=20;
       
 
-        var id = setInterval(frame, 25);
+        var id = setInterval(frame, 15);
 
 
         function frame(){
            
-            if(lat!=oldLatitude-howMuchToMove)
+            if(lat!=oldLatitude-howMuchToMove &&lat>-85)
             {
                 lat-=1;
 
@@ -206,7 +217,7 @@ function Canvas ({sides,chooseNextImage,choosePreviousImage,arrayOfImages}){
         var oldfov=camera.fov;
         var howMuchToMove=15;
 
-        var id = setInterval(frame, 25);
+        var id = setInterval(frame, 15);
 
 
         
@@ -242,7 +253,7 @@ function Canvas ({sides,chooseNextImage,choosePreviousImage,arrayOfImages}){
         var oldfov=camera.fov;
         var howMuchToMove=15;
 
-        var id = setInterval(frame, 25);
+        var id = setInterval(frame, 15);
 
 
         

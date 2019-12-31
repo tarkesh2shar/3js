@@ -17,6 +17,72 @@ export default function canvasController({
 
 
     const [isOpen, setisOpen] = useState(false)
+
+
+    // const debounce = (func, delay) => {
+    //     let inDebounce
+    //     return function() {
+    //       const context = this
+    //       const args = arguments
+    //       clearTimeout(inDebounce)
+    //       inDebounce = setTimeout(() => func.apply(context, args), delay)
+    //     }
+    //   }
+
+
+    //   function throttle(callback, delay) {
+    //     var timeoutHandler = null;
+    //     return function () {
+    //         if (timeoutHandler == null) {
+    //             timeoutHandler = setTimeout(function () {
+    //                 callback();
+    //                 clearInterval(timeoutHandler);
+    //                 timeoutHandler = null;
+    //             }, delay);
+    //         }
+    //     }
+    // }
+
+    function debounce(callback, wait, immediate = false) {
+        let timeout = null 
+        
+        return function() {
+          const callNow = immediate && !timeout
+          const next = () => callback.apply(this, arguments)
+          
+          clearTimeout(timeout)
+          timeout = setTimeout(next, wait)
+      
+          if (callNow) {
+            next()
+          }
+        }
+      }
+
+    function throttle(callback, wait, immediate = false) {
+        let timeout = null 
+        let initialCall = true
+        
+        return function() {
+          const callNow = immediate && initialCall
+          const next = () => {
+            callback.apply(this, arguments)
+            timeout = null
+          }
+          
+          if (callNow) { 
+            initialCall = false
+            next()
+          }
+      
+          if (!timeout) {
+            timeout = setTimeout(next, wait)
+          }
+        }
+      }
+      
+    
+    
     return (
         <div className="canvas__Controller">
             <p className="canvas__para">Feelings comes and go like clouds in a windy sky. - Scene1</p>
@@ -58,18 +124,18 @@ export default function canvasController({
 
                 <div className="canvas__icon__middle">
 
-                    <svg onClick={()=>onLeftClick()}>
+                    <svg onClick={debounce(onLeftClick,300,false)}>
                         <use xlinkHref={`${Sprite}#icon-circle-left`} />
                     </svg>
 
-                    <svg onClick={()=>onRightClick()}>
+                    <svg onClick={debounce(onRightClick,300,false)}>
                         <use xlinkHref={`${Sprite}#icon-circle-right`} />
                     </svg>
-                    <svg onClick={()=>onUpClick()}> 
+                    <svg onClick={debounce(onUpClick,300,false)}> 
                         <use xlinkHref={`${Sprite}#icon-arrow-outline-up`} />
                     </svg>
 
-                    <svg onClick={()=>onDownClick()}>
+                    <svg onClick={debounce(onDownClick,300,false)}>
                         <use xlinkHref={`${Sprite}#icon-arrow-outline-down`} />
                     </svg>
                     <svg onClick={()=>onZoomUp()}>
