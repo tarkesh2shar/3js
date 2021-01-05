@@ -1,4 +1,4 @@
-*,*::after,*::before{
+*,*::after,*::before{ 
 
   box-sizing: border-box;
   padding: 0;
@@ -16,7 +16,7 @@ canvas {
 body {
   position: relative;
 
-  background-color: orange;
+  background-color: grey;
 }
 
 .sampleGallery {
